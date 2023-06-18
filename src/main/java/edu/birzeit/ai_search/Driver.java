@@ -27,6 +27,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Driver extends Application {
 
@@ -151,6 +153,42 @@ public class Driver extends Application {
                 }
             }
         });
+        //////////////////////////////////////////////////////////////////////////
+        //button events
+        aSearch.setOnAction(actionEvent -> {
+            City start = findCity(source.getText().toString(), this.graph.getCities());
+            City end = findCity(destination.getText().toString(), this.graph.getCities());
+            if(start == null || end == null){
+                System.out.println("ss");
+            }
+            City result = this.graph.aStar(start, end);
+            if(result == null ){
+                System.out.println("ss1");
+            }
+            this.path = calcPath(result);
+
+            for(int i = 0; i < this.path.size(); i++){
+                pathArea.setText(this.path.get(i).getCityName() + "-->" + "\n");
+            }
+        });
+
+        gSearch.setOnAction(actionEvent -> {
+            City start = findCity(source.getText().toString(), this.graph.getCities());
+            City end = findCity(destination.getText().toString(), this.graph.getCities());
+            if(start == null || end == null){
+                System.out.println("ss");
+            }
+            City result = this.graph.greedySearch(start, end);
+            if(result == null ){
+                System.out.println("ss1");
+            }
+            this.path = calcPath(result);
+
+            for(int i = 0; i < this.path.size(); i++){
+                pathArea.setText(this.path.get(i).getCityName() + "-->" + "\n");
+            }
+        });
+
 
         Scene scene = new Scene(pane, 500, 500);
         stage.setTitle("Search Algorithms!");
@@ -168,6 +206,7 @@ public class Driver extends Application {
             path.add(current);
             current = current.getParent();
         }
+        Collections.reverse(path);
         return path;
     }
 

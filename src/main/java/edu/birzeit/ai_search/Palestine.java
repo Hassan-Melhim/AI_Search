@@ -69,10 +69,10 @@ public class Palestine {//Undirected Graph
             }//if the current is the destination city, save the source city
         }
 
-        return null;//if no adjacent is found
+        return adj;//if no adjacent is found
     }
 
-    public City AStar (City start, City end){
+    public City aStar (City start, City end){
         PriorityQueue<City> unvisited = new PriorityQueue<>();
         PriorityQueue<City> visited = new PriorityQueue<>();
 
