@@ -3,30 +3,32 @@ package edu.birzeit.ai_search;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class Driver extends Application {
-    @FXML
-    AnchorPane pane;
-    @FXML
-    VBox vb;
-    @FXML
-    TextField source, destination;
 
     public static Control control;
     ArrayList<City> path;
@@ -85,9 +87,41 @@ public class Driver extends Application {
             actualReader.close();
             airReader.close();
         }
-
         this.graph = new Palestine(cityTemp,roadTemp);
+        //////////////////////////////////////////////////////////////////////////
+        BorderPane pane = new BorderPane();
+        //right
+        VBox right = new VBox();
+        right.setPadding(new Insets(10));
 
+        TextField source = new TextField();
+        source.setPromptText("Source");
+
+        TextField destination = new TextField();
+        destination.setPromptText("Destination");
+
+        HBox search = new HBox();
+        search.setPadding(new Insets(5));
+        Button aSearch = new Button("Search with A*");
+        Button gSearch = new Button("Search with greedy");
+        search.getChildren().addAll(aSearch,gSearch);
+
+        Button clear = new Button("Clear");
+
+        TextArea pathArea = new TextArea();
+
+        right.getChildren().addAll(source, destination,search, clear, pathArea);
+        pane.setRight(right);
+
+        //center
+        FileInputStream input = new FileInputStream("src\\main\\resources\\PalestineMap.jpeg");
+        Image image = new Image(input);
+        ImageView mv = new ImageView(image);
+        mv.setFitHeight(300);
+        mv.setFitWidth(300);
+        pane.setCenter(mv);
+
+        //////////////////////////////////////////////////////////////////////////
         //generate dots
         for (int i = 0; i < graph.getCities().size(); i++) {
             graph.getCities().get(i).c.setFill(Color.RED);
@@ -101,7 +135,6 @@ public class Driver extends Application {
                         if(click == 1){
                             graph.getCities().get(i).c.setFill(Color.GREEN);
                             source.setText(graph.getCities().get(i).getCityName());
-
                         }
                         if(click == 2){
                             graph.getCities().get(i).c.setFill(Color.GREEN);
@@ -114,7 +147,7 @@ public class Driver extends Application {
             }
         });
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(pane, 500, 500);
         stage.setTitle("Search Algorithms!");
         stage.setScene(scene);
         stage.show();
