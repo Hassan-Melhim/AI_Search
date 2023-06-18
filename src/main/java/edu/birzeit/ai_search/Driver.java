@@ -52,7 +52,7 @@ public class Driver extends Application {
             while((cityLine = cityReader.readLine()) != null){
                 String[] row = cityLine.split(",");
                 Circle temp = new Circle(Double.parseDouble(row[1]),
-                        Double.parseDouble(row[2]), 3);
+                        Double.parseDouble(row[2]), 5);
                 cityTemp.add(new City(Double.parseDouble(row[1]),
                         Double.parseDouble(row[2]), row[0], temp));
             }
@@ -130,19 +130,24 @@ public class Driver extends Application {
         pane.addEventHandler(MouseEvent.ANY, event -> {
             if(event.getEventType() == MouseEvent.MOUSE_PRESSED){
                 for(int i= 0; i < graph.getCities().size(); i++){
-                    if(cityTemp.get(i).c.equals(Color.RED)){
-                        click++;
-                        if(click == 1){
-                            graph.getCities().get(i).c.setFill(Color.GREEN);
-                            source.setText(graph.getCities().get(i).getCityName());
-                        }
-                        if(click == 2){
-                            graph.getCities().get(i).c.setFill(Color.GREEN);
-                            destination.setText(graph.getCities().get(i).getCityName());
-                        }
+                    if (graph.getCities().get(i).getX() + 10 > event.getX() && graph.getCities().get(i).getX() - 10 < event.getX()
+                            && graph.getCities().get(i).getY() + 10 > event.getY() && graph.getCities().get(i).getY() - 10 < event.getY()) {
 
+                        if (graph.getCities().get(i).c.equals(Color.RED)) {
+                            click++;
+                            if (click == 1) {
+                                graph.getCities().get(i).c.setFill(Color.GREEN);
+                                source.setText(graph.getCities().get(i).getCityName());
+                                System.out.println("sss");
+                            }
+                            if (click == 2) {
+                                graph.getCities().get(i).c.setFill(Color.GREEN);
+                                destination.setText(graph.getCities().get(i).getCityName());
+                            }
+
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         });
