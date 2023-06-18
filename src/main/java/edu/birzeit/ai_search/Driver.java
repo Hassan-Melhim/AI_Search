@@ -1,4 +1,5 @@
 package edu.birzeit.ai_search;
+//Zaina Amous and Hassan Melhim
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
