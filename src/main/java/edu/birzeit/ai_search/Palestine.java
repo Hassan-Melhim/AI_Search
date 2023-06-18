@@ -8,6 +8,10 @@ public class Palestine {//Undirected Graph
     private ArrayList<City> cities;
     private ArrayList<Road> roads;
 
+    public ArrayList<City> getCities() {
+        return cities;
+    }
+
     public Palestine(ArrayList<City> cities, ArrayList<Road> roads) {
         this.cities = cities;
         this.roads = roads;

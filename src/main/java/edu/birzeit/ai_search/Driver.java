@@ -6,32 +6,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Driver extends Application {
     @FXML
     AnchorPane pane;
+    @FXML
+    VBox vb;
+    @FXML
+    TextField source, destination;
+
     public static Control control;
     ArrayList<City> path;
     Palestine graph;
+    int click = 0;//to know whether city clicked is source or destination
 
     @Override
     public void start(Stage stage) throws IOException {
-        URL path = getClass().getResource("/hello-view.fxml");
+        URL path = getClass().getResource("/Main-View.fxml");
         FXMLLoader loader = new FXMLLoader(path);
         Parent root = loader.load();
         control = loader.getController();
@@ -85,12 +89,32 @@ public class Driver extends Application {
         this.graph = new Palestine(cityTemp,roadTemp);
 
         //generate dots
-        for (int i = 0; i < cityTemp.size(); i++) {
-            cityTemp.get(i).c.setFill(Color.RED);
-            pane.getChildren().addAll(cityTemp.get(i).c, root);
+        for (int i = 0; i < graph.getCities().size(); i++) {
+            graph.getCities().get(i).c.setFill(Color.RED);
+            pane.getChildren().add(graph.getCities().get(i).c);
         }
+        pane.addEventHandler(MouseEvent.ANY, event -> {
+            if(event.getEventType() == MouseEvent.MOUSE_PRESSED){
+                for(int i= 0; i < graph.getCities().size(); i++){
+                    if(cityTemp.get(i).c.equals(Color.RED)){
+                        click++;
+                        if(click == 1){
+                            graph.getCities().get(i).c.setFill(Color.GREEN);
+                            source.setText(graph.getCities().get(i).getCityName());
 
-        Scene scene = new Scene(pane);
+                        }
+                        if(click == 2){
+                            graph.getCities().get(i).c.setFill(Color.GREEN);
+                            destination.setText(graph.getCities().get(i).getCityName());
+                        }
+
+                    }
+                    break;
+                }
+            }
+        });
+
+        Scene scene = new Scene(root);
         stage.setTitle("Search Algorithms!");
         stage.setScene(scene);
         stage.show();
