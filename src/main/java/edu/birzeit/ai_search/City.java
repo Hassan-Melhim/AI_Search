@@ -1,17 +1,22 @@
 package edu.birzeit.ai_search;
 
+import javafx.scene.shape.Circle;
+
 public class City implements Comparable<City>{//Vertex
     private double x;
     private double y;
     private String name;
-    private City parent;//
+    private City parent;
     double f;//function. f = g+h
     double travelledCost;//score of the cumulated actual distance
 
-    public City(double x, double y, String name){
+    Circle c;
+
+    public City(double x, double y, String name, Circle c){
         this.x = x;
         this.y = y;
         this.name = name;
+        this.c = c;
     }
 
     public City(){

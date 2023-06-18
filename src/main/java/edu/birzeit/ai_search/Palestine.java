@@ -136,5 +136,4 @@ public class Palestine {//Undirected Graph
         }
         return null;//if not found
     }
-
 }

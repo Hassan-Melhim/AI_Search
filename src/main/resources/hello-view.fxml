@@ -8,38 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-
-<!--
-        <?xml version="1.0" encoding="UTF-8"?>
-
-        <?import javafx.scene.control.Button?>
-        <?import javafx.scene.control.TextArea?>
-        <?import javafx.scene.control.TextField?>
-        <?import javafx.scene.image.Image?>
-        <?import javafx.scene.image.ImageView?>
-        <?import javafx.scene.layout.AnchorPane?>
-
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-           <children>
-              <TextField layoutX="405.0" layoutY="100.0" promptText="Destination City" />
-              <TextField layoutX="405.0" layoutY="61.0" promptText="Source City " />
-              <Button layoutX="405.0" layoutY="144.0" mnemonicParsing="false" text="Search" />
-              <Button layoutX="501.0" layoutY="144.0" mnemonicParsing="false" text="clear" />
-              <TextArea layoutX="373.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" />
-              <TextField layoutX="373.0" layoutY="425.0" prefHeight="26.0" prefWidth="200.0" />
-              <ImageView fitHeight="464.0" fitWidth="319.0" layoutX="10.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-                 <image>
-                    <Image url="PalestineMap.jpg" />
-                 </image>
-              </ImageView>
-           </children>
-        </AnchorPane>
-        -->
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="pane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <ImageView fx:id="maps" fitHeight="313.0" fitWidth="229.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -61,22 +33,6 @@
             <Label layoutX="451.0" layoutY="92.0" text="Actual time:" />
             <Label layoutX="482.0" layoutY="157.0" text="Cost when using A*" />
             <Label layoutX="454.0" layoutY="258.0" text="Cost when using Greedy algorithm" />
-            <Circle id="Yafa" fill="DODGERBLUE" layoutX="101.0" layoutY="208.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Tulkarm" fill="DODGERBLUE" layoutX="131.0" layoutY="174.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Jenin" fill="DODGERBLUE" layoutX="166.0" layoutY="141.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Acre" fill="DODGERBLUE" layoutX="155.0" layoutY="72.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Haifa" fill="DODGERBLUE" layoutX="128.0" layoutY="75.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Rafah" fill="DODGERBLUE" layoutX="46.0" layoutY="335.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Tiberias" fill="DODGERBLUE" layoutX="191.0" layoutY="88.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Nazareth" fill="DODGERBLUE" layoutX="166.0" layoutY="92.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Hebron" fill="DODGERBLUE" layoutX="172.0" layoutY="287.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Bethlehem" fill="DODGERBLUE" layoutX="172.0" layoutY="267.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Jerusalem" fill="DODGERBLUE" layoutX="188.0" layoutY="251.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="jericho" fill="DODGERBLUE" layoutX="188.0" layoutY="226.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Ramallah" fill="DODGERBLUE" layoutX="155.0" layoutY="229.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Nablus" fill="DODGERBLUE" layoutX="185.0" layoutY="178.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Qalqilya" fill="DODGERBLUE" layoutX="134.0" layoutY="195.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle id="Safad" fill="DODGERBLUE" layoutX="191.0" layoutY="59.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" />
             <Button layoutX="258.0" layoutY="310.0" mnemonicParsing="false" text="Path" />
             <Button layoutX="325.0" layoutY="310.0" mnemonicParsing="false" text="Reset" />
          </children>
