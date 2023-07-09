@@ -50,6 +50,7 @@ public class Driver extends Application {
         ArrayList<City> cityTemp = new ArrayList<>();
         BufferedReader cityReader = null;
         String cityLine = "";
+
         try{
             cityReader = new BufferedReader(new FileReader(file));
             while((cityLine = cityReader.readLine()) != null){
@@ -76,13 +77,19 @@ public class Driver extends Application {
         try{
             actualReader = new BufferedReader(new FileReader(actualfile));
             airReader = new BufferedReader(new FileReader(airfile));
+
             while((actualLine = actualReader.readLine()) != null){
                 airLine = airReader.readLine();
                 String[] actualRow = actualLine.split(",");
                 String[] airRow = airLine.split(",");
 
-                roadTemp.add(new Road(findCity(airRow[0], cityTemp), findCity(airRow[1], cityTemp)
+                City city1 = findCity(airRow[0], cityTemp);
+                City city2 = findCity(airRow[1], cityTemp);
+
+                roadTemp.add(new Road(city1, city2
                         , Double.parseDouble(actualRow[2]), Double.parseDouble(airRow[2])));
+                ;
+
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -160,16 +167,17 @@ public class Driver extends Application {
             City start = findCity(source.getText().toString(), this.graph.getCities());
             City end = findCity(destination.getText().toString(), this.graph.getCities());
             if(start == null || end == null){
-                System.out.println("ss");
+                System.out.println("Input ERROR");
             }
             City result = this.graph.aStar(start, end);
+
             if(result == null ){
-                System.out.println("ss1");
+                pathArea.setText("No path exists");
             }
             this.path = calcPath(result);
 
             for(int i = 0; i < this.path.size(); i++){
-                pathArea.setText(this.path.get(i).getCityName() + "-->" + "\n");
+                pathArea.setText(pathArea.getText() + "\n" +this.path.get(i).getCityName() + "-->" + "\n");
             }
         });
 
@@ -213,6 +221,7 @@ public class Driver extends Application {
 
     public City findCity(String name, ArrayList<City> cities){
         for (int i = 0; i < cities.size(); i ++){
+            //System.out.println(cities.get(i).getCityName() + "\n name:" + name);
             if(cities.get(i).getCityName().equalsIgnoreCase(name)){
                 return cities.get(i);
             }

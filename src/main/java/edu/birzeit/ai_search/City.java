@@ -41,7 +41,7 @@ public class City implements Comparable<City>{//Vertex
     }
 
     public String getCityName() {
-        return name;
+        return this.name;
     }
 
     public void setCityName(String name) {

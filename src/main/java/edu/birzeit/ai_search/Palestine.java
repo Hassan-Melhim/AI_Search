@@ -60,11 +60,11 @@ public class Palestine {//Undirected Graph
 
         for(int i = 0; i < roads.size(); i++){
 
-            if(roads.get(i).getCity1().equals(current.getCityName())){
+            if(roads.get(i).getCity1().getCityName().equals(current.getCityName())){
                 adj.add(roads.get(i).getCity2());
             }//if the current is the source city, save the destination city
 
-            if(roads.get(i).getCity2().equals(current.getCityName())){
+            if(roads.get(i).getCity2().getCityName().equals(current.getCityName())){
                 adj.add(roads.get(i).getCity1());
             }//if the current is the destination city, save the source city
         }
@@ -94,6 +94,10 @@ public class Palestine {//Undirected Graph
 
 
             ArrayList<City> available = findAdjacentCities(current);//get all the adjacent cities of the current city
+
+                System.out.print(available.size());
+
+
             for(int i = 0; i < available.size(); i ++){//walk through them to calculate the f, then adding them to the unvisited queue
                 available.get(i).travelledCost = findActualDistance(current,available.get(i)) + current.travelledCost;
                 available.get(i).f = available.get(i).travelledCost + findHeuristicDistance(current, available.get(i));
