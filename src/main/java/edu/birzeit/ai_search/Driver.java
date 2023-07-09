@@ -40,11 +40,6 @@ public class Driver extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        URL path = getClass().getResource("/Main-View.fxml");
-        FXMLLoader loader = new FXMLLoader(path);
-        Parent root = loader.load();
-        control = loader.getController();
-
         //read file for cities
         String file = "src\\main\\resources\\cities.csv";
         ArrayList<City> cityTemp = new ArrayList<>();
@@ -174,10 +169,13 @@ public class Driver extends Application {
             if(result == null ){
                 pathArea.setText("No path exists");
             }
-            this.path = calcPath(result);
+            else{
+                ArrayList<String> paths = new ArrayList<String>();
+                paths = calcPath(result);
 
-            for(int i = 0; i < this.path.size(); i++){
-                pathArea.setText(pathArea.getText() + "\n" +this.path.get(i).getCityName() + "-->" + "\n");
+                for(int i = 0; i < this.path.size(); i++){
+                    pathArea.setText(pathArea.getText() + "\n" + paths.get(i) + "-->" + "\n");
+                }
             }
         });
 
@@ -189,12 +187,14 @@ public class Driver extends Application {
             }
             City result = this.graph.greedySearch(start, end);
             if(result == null ){
-                System.out.println("ss1");
+                pathArea.setText("No path exists");
             }
-            this.path = calcPath(result);
+            else {
+                //this.path = calcPath(result);
 
-            for(int i = 0; i < this.path.size(); i++){
-                pathArea.setText(this.path.get(i).getCityName() + "-->" + "\n");
+                for (int i = 0; i < this.path.size(); i++) {
+                    pathArea.setText(pathArea.getText() + this.path.get(i).getCityName() + "-->" + "\n");
+                }
             }
         });
 
@@ -209,13 +209,26 @@ public class Driver extends Application {
         launch();
     }
 
-    public ArrayList<City> calcPath (City current){
-        this.path  = new ArrayList<City>();
-        while (current != null){
-            path.add(current);
+//    public ArrayList<City> calcPath (City current){
+//        ArrayList<City> path  = new ArrayList<City>();
+//        int i = 0;
+//        do {
+//            path.add(current);
+//            current = current.getParent();
+//            System.out.println(path.size());
+//            i++;
+//        } while (current.getParent() != null || i<5);
+//        Collections.reverse(path);
+//        return path;
+//    }
+
+    public ArrayList<String> calcPath(City current){
+        ArrayList<String> path  = new ArrayList<String>();
+
+        do{
+            path.add(current.getCityName());
             current = current.getParent();
-        }
-        Collections.reverse(path);
+        } while(current.getParent() != null);
         return path;
     }
 

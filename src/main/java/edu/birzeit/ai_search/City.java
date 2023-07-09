@@ -17,6 +17,7 @@ public class City implements Comparable<City>{//Vertex
         this.y = y;
         this.name = name;
         this.c = c;
+        this.parent = new City();
     }
 
     public City(){

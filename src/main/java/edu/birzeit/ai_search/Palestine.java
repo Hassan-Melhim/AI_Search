@@ -95,14 +95,12 @@ public class Palestine {//Undirected Graph
 
             ArrayList<City> available = findAdjacentCities(current);//get all the adjacent cities of the current city
 
-                System.out.print(available.size());
-
-
             for(int i = 0; i < available.size(); i ++){//walk through them to calculate the f, then adding them to the unvisited queue
                 available.get(i).travelledCost = findActualDistance(current,available.get(i)) + current.travelledCost;
                 available.get(i).f = available.get(i).travelledCost + findHeuristicDistance(current, available.get(i));
                 unvisited.add(available.get(i));
                 available.get(i).setParent(current);//in order to remember the path taken
+
             }
 
             unvisited.remove(current);
